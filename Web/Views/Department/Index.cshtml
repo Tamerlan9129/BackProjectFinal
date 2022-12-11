@@ -1,0 +1,64 @@
+﻿@using Web.ViewModels.Department;
+@model DepartmentIndexVM;
+
+@{
+    ViewBag.Title = "Medical Department";
+}
+<!-- main starts -->
+<main>
+    <!-- main-frame section starts -->
+    <section class="main-frame-2 no-select" style="background-image: url(assets/images/medical-department.jpg);">
+        <div class="container">
+            <div class="row main-frame-2-title align-items-center">
+                <div class="col-md-6 main-frame-2-title-text">Medical Department</div>
+                <div class="col-md-6 text-md-right main-frame-2-title-breadcrumb">Home / Medical Department</div>
+            </div>
+        </div>
+        <div class="overlay"></div>
+    </section>
+    <!-- main-frame section ends -->
+    <!-- item section starts -->
+    <section class="items no-select">
+        <div class="container">
+            <div class="row items-section-title align-items-center">
+                <div class="col-md-6">
+                    <h2 class="heading" data-aos="fade-up" data-aos-duration="2000">
+                        Expert physician and caring clinical staff provide you with an <span class="defaultcolor">exceptional patient care.</span>
+                    </h2>
+                </div>
+                <div class="col-md-6">
+                    <p class="description" data-aos="fade-up" data-aos-duration="2000">
+                        Syring Medical Center provide patients with choices to ask for the conducting and analyzing
+                        of several lab tests on-site at no cost for prioritized patients or at 70% for people with
+                        an insurance. Additional testing can be ordered off site; those costs are the responsibility
+                        of the enquirers.
+                    </p>
+                </div>
+            </div>
+            <div class="row items-content" data-aos="fade-up" data-aos-duration="2000">
+                @{
+                    foreach (var department in Model.MedicalDepartments)
+                    {
+                        <div class="col-lg-4 mb-5">
+                            <div class="md-item">
+                                <div class="md-item-icon">
+                                    <img style="width:135px;height:128px;" src="assets/images/@department.PhotoName" alt="">
+                                </div>
+                                <div class="title">
+                                    @department.Title
+                                </div>
+                                <p class="subtitle">
+                                    @Html.Raw(department.Description)
+                                </p>
+                                <div class="button">More Details >></div>
+                            </div>
+                        </div>
+                    }
+                }
+                
+            </div>
+        </div>
+    </section>
+    <!-- item section ends -->
+</main>
+<!-- main ends -->

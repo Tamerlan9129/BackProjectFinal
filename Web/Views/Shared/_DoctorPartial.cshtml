@@ -1,0 +1,39 @@
+﻿@using Web.ViewModels.Doctor;
+@model DoctorIndexVM;
+
+
+<div>
+    <p class="associated-doctor-title">
+        Results 
+    </p>
+<button onclick="location.reload()" id="clear-result" class="btn btn-outline-primary">Clear</button>
+</div>
+<div class="doctor-items">
+    @{
+        foreach (var doctor in Model.Doctors)
+        {
+            <div class="doctor-item">
+                <div class="doctor-item-wrapper d-flex">
+                    <div class="doctor-img">
+                        <img style="width:225px;height:225px" src="assets/images/@doctor.PhotoName" alt="">
+                    </div>
+                    <div class="doctor-info">
+                        <div class="doctor-name">@doctor.FullName</div>
+                        <div class="doctor-subtitle">
+                            @doctor.Info
+                        </div>
+                        <div class="doctor-skill">
+                            @Html.Raw(doctor.Qualification)
+                        </div>
+                        <div class="view-appointment d-flex">
+                            <div class="view">
+                                <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id">View Profile</a>
+                                <span class="line"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

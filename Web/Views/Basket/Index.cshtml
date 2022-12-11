@@ -1,0 +1,72 @@
+﻿@using Web.ViewModels.Basket;
+@model BasketIndexVM;
+@{
+    ViewBag.Title = "Card";
+}
+<main>
+    <section class="product-table no-select">
+        <div class="container">
+            @{
+                if (Model.BasketProducts.Count > 0)
+                {
+                    <form method="post" asp-action="ClearBasket" asp-controller="basket" asp-route-id="@Model.BasketId" class="pr-form" style="display:block;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="pr-name text-left" colspan="2">Product</th>
+                                    <th class="pr-price text-center">Price</th>
+                                    <th class="pr-quantity text-center">Quantity</th>
+                                    <th class="pr-subtotal text-center">Total</th>
+                                    <th class="pr-remove"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model.BasketProducts)
+                                {
+                                    var sum = product.Price * product.Quantity;
+
+                                    <tr class="basket-product " id="@product.Id">
+                                        <td class="pr-image"><div class="pr-img" style="background-image: url(/assets/images/@product.Photoname)"></div></td>
+                                        <td class="pr-name text-left" data-title="Product :">@product.Title</td>
+                                        <td class="pr-price" data-title="Price :"><div><span>$</span><span class="pr-price-number"></span></div></td>
+                                        <td class="pr-quantity" data-title="@product.Quantity :">
+                                            <div class="q-input">
+                                                <input asp-for="@product.Quantity" type="number" min="1" class="quantity-input">
+                                                <i class="fas fa-minus decrease" data-id="@product.Id" id="@product.Id" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></i>
+                                                <i class="fas fa-plus increase" data-id="@product.Id" id="@product.Id" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"></i>
+                                            </div>
+                                        </td>
+                                        <td class="pr-t-price" data-title="Total :"><div><span>$</span><span>@sum</span></div></td>
+                                        <td class="pr-remove "><i class="fas fa-times x deleteButton" data-quantity="@product.Quantity" data-id="@product.Id" id="@product.Id"></i></td>.
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="row cart-buttons">
+                            <div class="col-12 col-xl-8 text-center text-lg-right text-xl-left">
+                                <a href="sidebar-left.html" class="button continue">Continue Shopping</a>
+                                <input type="text" placeholder="ENTER YOUR COUPON" class="coupon">
+                                <div class="button confirm">Confirm</div>
+                            </div>
+                            <div class="col-12 col-xl-4 text-center text-lg-right mt-0 mt-sm-5 mt-xl-0 d-flex">
+                                <div>
+                                    <button onclick="onsubmit('salam')" style="border:none;" class="button clear" type="submit">Clear Cart</button>
+                                </div>
+                                <div class="button update">Update Cart</div>
+                                <div class="deliver pt-5">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <p class="empty-cart-alert">Your basket is currently empty.</p>
+                    <a asp-action="index" asp-controller="shop" class="return-btn button">Return To Shop</a>
+                }
+            }
+        </div>
+    </section>
+    <!-- product-table section ends -->
+
+</main>

@@ -1,0 +1,17 @@
+﻿@using Web.Areas.Admin.ViewModels.About;
+@model AboutPhotoUpdateVM;
+
+<div class="container ">
+    <h4>Update Photo</h4>
+    <form method="post">
+        <div class="form-group col-3">
+            <label asp-for="Order"></label>
+            <input class="form-control" asp-for="Order">
+            <span class="text-danger" asp-validation-for="Order"></span>
+        </div>
+        <div class="pt-2">
+            <button class="btn btn-outline-success">Update</button>
+            <a class="btn btn-outline-danger" asp-action="update" asp-controller="about" asp-route-id="@Model.AboutId">Cancel</a>
+        </div>
+    </form>
+</div>

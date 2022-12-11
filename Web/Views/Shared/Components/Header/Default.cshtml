@@ -1,0 +1,165 @@
+﻿@using Web.ViewModels.Components;
+@model HeaderComponentVM;
+
+
+<!-- header start -->
+<header>
+    <div class="header-bottom no-select">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <div class="logo">
+                        <a href="index.html"><img src="~/assets/images/logo.svg" alt=""></a>
+                    </div>
+                </div>
+                <nav class="col-10 d-flex justify-content-around">
+                    <ul class="navigation  d-none d-xl-flex">
+                        <li class="home">
+                            <span class="title active-nav">Home</span>
+                            <div class="sub-menu">
+                                <div class="sub-menu-wrapper">
+                                    <a asp-action="index" asp-controller="home" class="active-nav">Home</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="pages">
+                            <span class="title">Pages</span>
+                            <div class="sub-menu">
+                                <div class="sub-menu-wrapper">
+                                    <a asp-action="index" asp-controller="faq">FAQ</a>
+                                    <a asp-action="index" asp-controller="pricing">Pricings</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="doctor">
+                            <span class="title">Doctors</span>
+                            <div class="sub-menu">
+                                <div class="sub-menu-wrapper">
+                                    <a asp-action="index" asp-controller="doctor">Find A Doctor</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="departments">
+                            <span class="title">Departments</span>
+                            <div class="sub-menu">
+                                <div class="sub-menu-wrapper">
+                                    <a asp-action="index" asp-controller="department">Medical Department</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="shop">
+                            <span class="title">Shop</span>
+                            <div class="sub-menu">
+                                <div class="sub-menu-wrapper">
+                                    <a asp-action="index" asp-controller="shop">Sidebar left</a>
+                                    <a asp-action="index" asp-controller="basket">Cart</a>
+                                </div>
+                            </div>
+                        </li>
+                        @{
+                            if (!User.Identity.IsAuthenticated)
+                            {
+                                <li class="shop">
+                                    <span class="title">Account</span>
+                                    <div class="sub-menu">
+                                        <div class="sub-menu-wrapper">
+                                            <a asp-action="register" asp-controller="account">Register</a>
+                                            <a asp-action="login" asp-controller="account">Login</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <div class="search-basket-menu d-flex align-items-center">
+                        <div class="search d-none d-md-block"><img src="~/assets/images/search-icon.png" alt=""></div>
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="basket" id="openBasket">
+                                    <img src="~/assets/images/shop-basket.png" alt="">
+                                    <span class="cart-items-count text-center" id="basketCount">@Model.Count</span>
+                                </div>
+                                <div class="burger-menu d-block d-xl-none"><i class="fas fa-bars"></i></div>
+                                <div class="px-2">
+                                    <span class="px-2">@User.Identity.Name</span>
+                                    <a asp-action="logout" asp-controller="account" class="btn btn-primary">Logout</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <div>
+                                        <a asp-action="login" asp-controller="account" class="btn btn-primary">Login</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+
+                </nav>
+                <div class="mini-cart" style="overflow-y:scroll">
+                    <ul class="cart-items" id="miniBasket">
+                    </ul>
+                  
+
+                </div>
+
+                <nav class="mobile-nav d-xl-none">
+                    <ul id="accordion">
+                        <li>
+                            <span class="active-nav">Home</span>
+                            <div class="mn-sub-menu">
+                                <a asp-action="index" asp-controller="home" class="active-nav">Home</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Pages</span>
+                            <div class="mn-sub-menu">
+                                <a asp-action="index" asp-controller="faq">FAQ</a>
+                                <a asp-action="index" asp-controller="pricing">Pricings</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <span>Doctors</span>
+                            <div class="mn-sub-menu">
+                                <a asp-action="index" asp-controller="doctor">Find A Doctor</a>
+                            </div>
+                        </li>
+
+                        <li>
+                            <span>Departments</span>
+                            <div class="mn-sub-menu">
+                                <a asp-action="index" asp-controller="department">Medical Department</a>
+
+                            </div>
+                        </li>
+                        <li>
+                            <span>Blog</span>
+                            <div class="mn-sub-menu">
+                                <a href="post-standard.html">Single Post Standard</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Shop</span>
+                            <div class="mn-sub-menu">
+                                <a asp-action="index" asp-controller="shop">Sidebar left</a>
+                                <a asp-action="index" asp-controller="basket">Cart</a>
+                                <a href="checkout.html">Checkout</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Elements</span>
+                            <div class="mn-sub-menu">
+                                <a>Coming Soon</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- header ends -->

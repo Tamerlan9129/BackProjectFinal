@@ -1,0 +1,30 @@
+﻿@using Web.Areas.Admin.ViewModels.LatestNews;
+@model LastestNewsCreateVM;
+
+<div class="container ">
+    <h4>Lastest News</h4>
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input class="form-control" asp-for="Title" />
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Type"></label>
+            <input class="form-control" asp-for="Type" />
+            <span class="text-danger" asp-validation-for="Type"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Photo"></label>
+            <input class="form-control" asp-for="Photo" />
+            <span class="text-danger" asp-validation-for="Photo"></span>
+        </div>
+        <div class="pt-2">
+            <button class="btn btn-outline-success">Submit</button>
+            <a class="btn btn-outline-danger" asp-action="index" asp-controller="lastestnews">Cancel</a>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    }

@@ -1,0 +1,65 @@
+﻿@using Web.Areas.Admin.ViewModels.Doctor;
+@model DoctorIndexVM;
+
+<h4>Doctors</h4>
+<div>
+    <a asp-action="create" asp-controller="doctor" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Showing Home</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Modified At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doctor in Model.Doctors)
+        {
+            <tr>
+                <td>@doctor.Id</td>
+                <td>@doctor.FullName</td>
+                <td>
+                    @{
+                        if (@doctor.ShowInHome)
+                        {
+                            <p>Showing</p>
+                        }
+                        else
+                        {
+                            <p>Not Showing</p>
+                        }
+                    }
+                </td>
+                <td>
+                    <img style="width:120px;height:120px;object-fit:cover" class="img-thumbnail" src="~/assets/images/@doctor.PhotoName" />
+                </td>
+                <td>@doctor.CreatedAt</td>
+                <td>
+                    @{
+                        if (@doctor.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                        {
+                            <p>Non Modified</p>
+                        }
+                        else
+                        {
+                            @doctor.ModifiedAt
+                        }
+                    }
+                </td>
+                <td>
+                    <form method="post">
+                        <a asp-action="update" asp-controller="doctor" asp-area="admin" asp-route-id="@doctor.Id" class="btn btn-outline-warning">Update</a>
+                        <a asp-action="details" asp-controller="doctor" asp-area="admin" asp-route-id="@doctor.Id" class="btn btn-outline-secondary">Details</a>
+                        <button type="submit" class="btn btn-outline-danger" asp-action="delete" asp-controller="doctor" asp-area="admin" asp-route-id="@doctor.Id">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,21 @@
+﻿@using Web.ViewModels.Faq;
+@model FaqIndexVM;
+
+<div class="question">
+    <ul id="accordion">
+        @{
+            foreach (var question in Model.Questions)
+            {
+                <li data-aos="fade-up" data-aos-duration="2000">
+                    <span>
+                        @question.Title
+                    </span>
+                    <div>
+                        @Html.Raw(question.Description)
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+</div>
+<script src="~/assets/js/script.js"></script>

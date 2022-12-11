@@ -1,0 +1,105 @@
+﻿@using Web.ViewModels.Doctor;
+@model DoctorIndexVM;
+
+@{
+    ViewBag.Title = "Doctors";
+}
+<main>
+    <!-- main-frame section starts -->
+    <section class="main-frame-2 no-select" style="background-image: url(assets/images/doctor-page-title.jpg);">
+        <div class="container">
+            <div class="row main-frame-2-title align-items-center">
+                <div class="col-md-6 main-frame-2-title-text">Find A Doctor</div>
+                <div class="col-md-6 text-md-right main-frame-2-title-breadcrumb">Home / Find A Doctor</div>
+            </div>
+        </div>
+        <div class="overlay"></div>
+    </section>
+    <!-- main-frame section ends -->
+    <!-- find-doctor section starts -->
+    <section class="find-doctor no-select">
+        <div class="section-left-color"></div>
+        <div class="section-right-color"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-lg-4 find-doctor-left">
+                    <div class="search-doctor">
+                        <p class="search-doctor-title">
+                            Find the Doctor
+                        </p>
+                        <span class="line"></span>
+                        <div class="search-doctor-content">
+                            <div class="search-doctor-content-wrapper">
+                                <form method="get" asp-action="index" asp-controller="doctor" id="doctors_form" doctors_form>
+                                    <label for="">Doctor Name</label>
+                                    <input asp-for="Name" id="FullName" placeholder="Enter doctor name" class="search-doctor-input">
+                                    <button id="search-doctor" class="button text-center">Search Now</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-8 find-doctor-right" id="doctor-items">
+                    <p class="associated-doctor-title">
+                        Associated Doctors in Syring.
+                    </p>
+                    <p class="associated-description">
+                        Expert physician specialists and caring clinical staff provide you with an exceptional
+                        patient care is what sets Syring Medical Center apaert health care experience.
+                    </p>
+                    <div class="doctor-items">
+                        @{
+                            foreach (var doctor in Model.Doctors)
+                            {
+                                <div class="doctor-item">
+                                    <div class="doctor-item-wrapper d-flex">
+                                        <div class="doctor-img">
+                                            <img style="width:225px;height:225px" src="assets/images/@doctor.PhotoName" alt="">
+                                        </div>
+                                        <div class="doctor-info">
+                                            <div class="doctor-name">@doctor.FullName</div>
+                                            <div class="doctor-subtitle">
+                                                @doctor.Info
+                                            </div>
+                                            <div class="doctor-skill">
+                                                @Html.Raw(doctor.Qualification)
+                                            </div>
+                                            <div class="view-appointment d-flex">
+                                                <div class="view">
+                                                    <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id">View Profile</a>
+                                                    <span class="line"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        <div class="pagination d-flex">
+                            @{
+                                var prevPage = Model.Page - 1;
+                                if (1 < Model.Page)
+                                {
+                                    <a asp-action="index" asp-controller="doctor" asp-route-name="@Model.Name" asp-route-page="@prevPage" class="pagination-element"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+                                }
+
+                                for (int i = 1; i <= Model.PageCount; i++)
+                                {
+                                    <a asp-action="index" asp-controller="doctor" asp-route-page="@i" asp-route-name="@Model.Name" class="@(Model.Page==i?"pagination-element pagination-active":"pagination-element")">@i</a>
+                                }
+                                var nextPage = Model.Page + 1;
+                                if (Model.PageCount != Model.Page)
+                                {
+                                    <a asp-action="index" asp-controller="doctor" asp-route-name="@Model.Name" asp-route-page="@nextPage" class="pagination-element"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- find-doctor section ends -->
+
+</main>

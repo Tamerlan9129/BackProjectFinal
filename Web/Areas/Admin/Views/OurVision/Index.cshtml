@@ -1,0 +1,52 @@
+﻿@using Web.Areas.Admin.ViewModels.OurVision;
+@model OurVisionIndexVM;
+
+<h4>Our Vision</h4>
+<div>
+    <a asp-action="create" asp-controller="ourvision" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Created At</th>
+            <th>Modified At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ourVision in Model.OurVision)
+        {
+            <tr>
+                <td>@ourVision.Id</td>
+                <td>@ourVision.Title</td>
+                <td style="width:350px">@Html.Raw(ourVision.Description)</td>
+                <td>
+                    <img style="width:50px;height:50px;object-fit:cover" class="img-thumbnail" src="~/assets/images/@ourVision.PhotoName" />
+                </td>
+                <td>@ourVision.CreatedAt</td>
+                <td>
+                    @{
+                        if (@ourVision.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                        {
+                            <p>Non Modified</p>
+                        }
+                        else
+                        {
+                            @ourVision.ModifiedAt
+                        }
+                    }
+                </td>
+                <td>
+                    <form method="post" class="d-flex">
+                        <a asp-action="update" asp-controller="ourvision" asp-area="admin" asp-route-id="@ourVision.Id" class="btn btn-outline-warning mx-2">Update</a>
+                        <button type="submit" class="btn btn-outline-danger" asp-action="delete" asp-controller="ourvision" asp-area="admin" asp-route-id="@ourVision.Id">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

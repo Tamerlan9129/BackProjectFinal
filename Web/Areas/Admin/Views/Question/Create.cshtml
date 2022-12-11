@@ -1,0 +1,47 @@
+﻿@using Web.Areas.Admin.ViewModels.Question;
+@model QuestionCreateVM;
+
+<div class="container ">
+    <h4>Question Create</h4>
+    <form method="post">
+        <div class="col-6 mx-auto">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input class="form-control" asp-for="Title" />
+                <span class="text-danger" asp-validation-for="Title"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea class="form-control" asp-for="Description"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <select class="form-control" asp-for="CategoryId" asp-items="Model.Categories"></select>
+                <span asp-validation-for="CategoryId"></span>
+            </div>
+
+            <div class="pt-2">
+                <button class="btn btn-outline-success">Create</button>
+                <a class="btn btn-outline-danger" asp-action="index" asp-controller="question">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+    </script>
+    }

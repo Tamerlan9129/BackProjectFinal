@@ -1,0 +1,44 @@
+﻿@using Web.Areas.Admin.ViewModels.HomeMainSlider;
+@model HomeMainSliderDetailsVM;
+
+<div>
+    <h3>Home Main Slider</h3>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Slogan</th>
+            <th scope="col">Order</th>
+            <th scope="col">Button Link</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Modified At</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <th scope="row">@Model.Id</th>
+            <td>@Model.Title</td>
+            <td>@Model.Slogan</td>
+            <td>@Model.Order</td>
+            <td>@Model.ButtonLink</td>
+            <td>@Model.CreatedAt.ToLocalTime().ToUniversalTime()</td>
+            <td>
+                @{
+                    if (@Model.ModifiedAt.ToLocalTime().ToString() == "01.01.0001 04:00:00")
+                    {
+                        <span>Non modified</span>
+                    }
+                    else
+                    {
+                        @Model.ModifiedAt.ToLocalTime().ToUniversalTime()
+                    }
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="mb-3"><a class="btn btn-outline-secondary" asp-action="index" asp-controller="homemainslider" asp-area="admin">Cancel</a></div>
+

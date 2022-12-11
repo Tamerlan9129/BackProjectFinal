@@ -1,0 +1,163 @@
+﻿@using Web.Areas.Admin.ViewModels.Doctor;
+@model DoctorDetailsVM;
+
+
+<table class="table table-striped">
+    <h4>Profile Info</h4>
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">FullName</th>
+            <th scope="col">Added Home</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Modified At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.FullName</td>
+            <td>
+                @{
+                    if (@Model.ShowInHome == true)
+                    {
+                        <p>True</p>
+                    }
+                    else
+                    {
+                        <p>False</p>
+                    }
+                }
+            </td>
+            <td>
+                <img style="width:120px;height:120px;object-fit:cover" class="img-thumbnail" src="~/assets/images/@Model.PhotoName" />
+            </td>
+            <td>@Model.CreatedAt.ToString()</td>
+            <td>
+                @{
+                    if (@Model.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                    {
+                        <p>Non Modified</p>
+                    }
+                    else
+                    {
+                        @Model.ModifiedAt
+                    }
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table class="table table-striped">
+    <h4>Edcuation Info</h4>
+    <thead>
+        <tr>
+            <th scope="col">ShortInfo</th>
+            <th scope="col">Introducing</th>
+            <th scope="col">Qualification</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width:300px;">@Model.Info</td>
+            <td>@Html.Raw(Model.Introducing)</td>
+            <td>@Model.Qualification</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table class="table table-striped">
+    <h4>Work Time</h4>
+    <thead>
+        <tr>
+            <th scope="col">Monday To Friday</th>
+            <th scope="col">Sunday Time </th>
+            <th scope="col">Sunday Working</th>
+            <th scope="col">Skills</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Model.MondayToFridayStart.ToShortTimeString()-@Model.MondayToFridayEnd.ToShortTimeString()
+            </td>
+            <td style="width:200px">
+                @Model.SaturdayStart.ToShortTimeString()-@Model.SaturdayStart.ToShortTimeString()
+            </td>
+            <td>
+                @{
+                    if (@Model.SundayIsWorking == true)
+                    {
+                        <p>Working</p>
+                    }
+                    else
+                    {
+                        <p>Not Working</p>
+                    }
+                }
+            </td>
+            <td>@Html.Raw(Model.Skills)</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<table class="table table-striped">
+    <h4>Social Accounts</h4>
+    <thead>
+        <tr>
+            <th scope="col">Facebook</th>
+            <th scope="col">LinkedIn </th>
+            <th scope="col">Twitter</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @{
+                    if (@Model.Facebook == null)
+                    {
+                        <p>Empty</p>
+                    }
+                    else
+                    {
+                        @Model.Facebook
+                    }
+                }
+
+            </td>
+            <td>
+                @{
+                    if (@Model.LinkedIn == null)
+                    {
+                        <p>Empty</p>
+                    }
+                    else
+                    {
+                        @Model.LinkedIn
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    if (@Model.Twitter == null)
+                    {
+                        <p>Empty</p>
+                    }
+                    else
+                    {
+                        @Model.Twitter
+                    }
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="pt-3">
+    <a asp-action="index" asp-controller="doctor" asp-area="admin" class="btn btn-outline-secondary">Cancel</a>
+</div>

@@ -1,0 +1,89 @@
+﻿@using Web.ViewModels.Faq;
+@model FaqIndexVM;
+@{
+    ViewBag.Title = "Faq";
+}
+
+
+<main>
+    <!-- main-frame section starts -->
+    <section class="main-frame no-select" style="background-image: url(assets/images/main-frame-photo.jpg);">
+        <div class="main-frame-title">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <div class="main-frame-title-text">
+                            Frequent Asked Questions
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="main-frame-breadcrumb">
+                            Home / FAQ
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- main-frame section ends -->
+    <!-- questions section starts -->
+    <section class="questions no-select">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-lg-4">
+                    <div class="questions-tabs" data-aos="fade-up" data-aos-duration="2000">
+                        @{
+                            foreach (var question in Model.Questions)
+                            {/*tab active-tab*/
+                                <div data-id="@question.QuestionCategoryId" id="@question.QuestionCategoryId" class="@(question.QuestionCategory.Status.ToString()=="active"?"tab category active-tab":"tab category")">
+                                    <h5 class="tab-title">@question.QuestionCategory.Title</h5>
+                                    <p class="tab-text">
+                                        @Html.Raw(question.QuestionCategory.Description)
+                                    </p>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-8">
+                    <div class="questions-content" data-aos="fade-up" data-aos-duration="2000">
+                        @{
+                            foreach (var question in Model.Questions)
+                            {
+                                if (question.QuestionCategory.Status.ToString() == "active")
+                                {
+                                    <h5 class="content-title">@question.QuestionCategory.Title</h5>
+                                    <p class="help-center">
+                                        Can’t find it here? Check out our<a href="" class="help-link">
+                                            Help
+                                            Center
+                                        </a>
+                                    </p>
+                                }
+                            }
+                        }
+                        <div class="question" id="questions">
+                            <ul id="accordion">
+                                @{
+                                    foreach (var question in Model.Questions)
+                                    {
+                                        <li data-aos="fade-up" data-aos-duration="2000">
+                                            <span>
+                                                @question.Title
+                                            </span>
+                                            <div>
+                                                @Html.Raw(question.Description)
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- questions section ends -->
+
+</main>

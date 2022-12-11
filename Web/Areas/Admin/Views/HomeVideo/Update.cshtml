@@ -1,0 +1,26 @@
+﻿@using Web.Areas.Admin.ViewModels.HomeVideo;
+@model HomeVideoUpdateVM;
+
+
+<div class="container ">
+    <h4>Home Video Update</h4>
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label asp-for="Link"></label>
+            <input class="form-control" asp-for="Link" />
+            <span class="text-danger" asp-validation-for="Link"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CoverPhoto"></label>
+            <input class="form-control" asp-for="CoverPhoto" />
+            <span class="text-danger" asp-validation-for="CoverPhoto"></span>
+        </div>
+        <div class="pt-2">
+            <button class="btn btn-outline-success">Submit</button>
+            <a class="btn btn-outline-danger" asp-action="index" asp-controller="homevideo">Cancel</a>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    }

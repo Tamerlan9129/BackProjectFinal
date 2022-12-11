@@ -1,0 +1,115 @@
+﻿@using Core.Entities;
+@model Doctor;
+
+@{
+    ViewBag.Title = $"{Model.FullName} Info";
+}
+<!-- main starts -->
+<main>
+    <!-- main-frame-2 section starts -->
+    <section class="main-frame-2 no-select" style="background-image: url('/assets/images/doctor-page-title.jpg');">
+        <div class="container">
+            <div class="row main-frame-2-title align-items-center">
+                <div class="col-md-6 main-frame-2-title-text">@Model.FullName</div>
+                <div class="col-md-6 text-md-right main-frame-2-title-breadcrumb">Home / Doctors / @Model.FullName</div>
+            </div>
+        </div>
+        <div class="overlay"></div>
+    </section>
+    <!-- main-frame-2 section ends -->
+    <!-- doctor single section starts -->
+    <section class="doctor-single no-select">
+        <div class="section-left-color"></div>
+        <div class="section-right-color"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 section-left">
+                    <div class="img-container">
+                        <img src="~/assets/images/@Model.PhotoName" alt="">
+                    </div>
+                    <div class="doc-info">
+                        <h2 class="doctor-name">Dr.@Model.FullName</h2>
+                        <h2 class="sub-heading">@Model.Position</h2>
+                    </div>
+                    <div class="qualification">
+                        <div class="qualification-title d-flex">
+                            <i class="fas fa-briefcase-medical"></i>
+                            <h4>Qualification</h4>
+                        </div>
+                        <div class="qualification-description">
+                            <p>@Model.Qualification</p>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-info-title d-flex">
+                            <i class="far fa-address-card"></i>
+                            <h4>Contact Info</h4>
+                        </div>
+                        <div class="contact-info-description">
+                            <div class="phone">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>@Model.Phone</span>
+                            </div>
+                            <div class="mail">
+                                <i class="far fa-envelope"></i>
+                                <span>@Model.Email</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="working-time">
+                        <div class="working-time-title d-flex">
+                            <i class="far fa-calendar-alt"></i>
+                            <h4>Working Time</h4>
+                        </div>
+                        <ul class="working-time-description">
+                            <li class="d-flex justify-content-between">
+                                <span class="day">Monday - Friday</span>
+                                <span>@Model.MondayToFridayStart.ToShortTimeString()-@Model.MondayToFridayEnd.ToShortTimeString()</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <span class="day">Saturday</span>
+                                <span>@Model.SaturdayStart.ToShortTimeString() - @Model.SaturdayEnd.ToShortTimeString()</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <span class="day">Sunday</span>
+                                <span>@Model.SundayIsWorking</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8 section-right">
+                    <div class="introducting">
+                        <h4>Introducting</h4>
+                        <div class="introducting-subtitle d-flex">
+                            <blockquote>
+                                <i class="fas fa-quote-left"></i>
+                            </blockquote>
+                            <span>
+                                “I highly appreciate your help for my family in our most difficult time. We owed
+                                everyone at @@syring a big thank you and our life.”
+                            </span>
+                        </div>
+                        <div class="introducting-text">
+                            @Html.Raw(Model.Introducing)
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-title">
+                            <h4>Skill</h4>
+                        </div>
+                        <div class="skill-content">
+                            <div class="row">
+                                <ul class="col-sm-12 col-md-8">
+                                    @Html.Raw(Model.Skills)
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- doctor single section ends -->
+</main>
+<!-- main ends -->

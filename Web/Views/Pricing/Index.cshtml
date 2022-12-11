@@ -1,0 +1,60 @@
+﻿@using Web.ViewModels.Pricing;
+@model PricingIndexVM;
+@{
+    ViewBag.Title = "Pricing";
+}
+<main>
+    <!-- main-frame section starts -->
+    <section class="main-frame no-select" style="background-image: url(assets/images/main-frame-photo.jpg);">
+        <div class="main-frame-title">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <div class="main-frame-title-text">
+                            Pricings
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="main-frame-breadcrumb">
+                            Home / Pricings
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- main-frame section ends -->
+    <!-- pricings section starts -->
+    <section class="pricings no-select">
+        <div class="container">
+            <div class="pricing-top text-center" data-aos="fade-down" data-aos-duration="1500">
+                <p class="sub-heading">PRICING AND PLAN</p>
+                <h2 class="heading">A monthly fee. No costly surprises</h2>
+            </div>
+            <div class="pricing-slider" data-aos="fade-up" data-aos-duration="1500">
+                @{
+                    foreach (var pricing in Model.Pricings)
+                    {/*class="@(Model.Page==i ? "mkdf-pag-active disabled": "mkdf-pag-inactive")"  */
+                        <div class="@(pricing.Status.ToString().ToLower()=="active"? "pricing-slider-element active-price slick-slide slick-active":"pricing-slider-element")  ">
+                            <div class="slider-element-wrapper">
+                                <h4 class="title-pricing">@pricing.Title</h4>
+                                <p class="subtitle-pricing">@pricing.SubTitle</p>
+                                <div class="price">
+                                    <span class="unitprice">$</span>
+                                    <span class="price-value">@pricing.Price</span>
+                                    <span class="per">/ per @pricing.Period</span>
+                                </div>
+                                <ul class="features">
+                                    @Html.Raw(pricing.Features)
+                                </ul>
+                                <div style="cursor:pointer" class="get-started">Get Started</div>
+                            </div>
+                        </div>
+                    }
+                }
+                
+            </div>
+        </div>
+    </section>
+    <!-- pricings section ends -->
+</main>

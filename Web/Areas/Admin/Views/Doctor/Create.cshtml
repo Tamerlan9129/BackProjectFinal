@@ -1,0 +1,138 @@
+﻿@using Core.Constants
+@using Web.Areas.Admin.ViewModels.Doctor;
+@model DoctorCreateVM;
+
+<div class="container ">
+    <h4>Medical Department</h4>
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label asp-for="FullName"></label>
+            <input class="form-control" asp-for="FullName">
+            <span class="text-danger" asp-validation-for="FullName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input class="form-control" asp-for="Email" />
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone"></label>
+            <input class="form-control" asp-for="Phone" />
+            <span class="text-danger" asp-validation-for="Phone"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Position"></label>
+            <select class="form-control" asp-for="Position" asp-items="Html.GetEnumSelectList<Position>()">
+                <option value="">Select Position</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Position"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Info"></label>
+            <input class="form-control" asp-for="Info" />
+            <span class="text-danger" asp-validation-for="Info"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Qualification"></label>
+            <input class="form-control" asp-for="Qualification" />
+            <span class="text-danger" asp-validation-for="Qualification"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Introducing"></label>
+            <textarea class="form-control" asp-for="Introducing"></textarea>
+            <span class="text-danger" asp-validation-for="Introducing"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Skills"></label>
+            <textarea class="form-control" asp-for="Skills"></textarea>
+            <span class="text-danger" asp-validation-for="Skills"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SaturdayStart"></label>
+            <input class="form-control" asp-for="SaturdayStart" />
+            <span class="text-danger" asp-validation-for="SaturdayStart"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SaturdayEnd"></label>
+            <input class="form-control" asp-for="SaturdayEnd" />
+            <span class="text-danger" asp-validation-for="SaturdayEnd"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MondayToFridayStart"></label>
+            <input class="form-control" asp-for="MondayToFridayStart" />
+            <span class="text-danger" asp-validation-for="MondayToFridayStart"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MondayToFridayEnd"></label>
+            <input class="form-control" asp-for="MondayToFridayEnd" />
+            <span class="text-danger" asp-validation-for="MondayToFridayEnd"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Photo"></label>
+            <input class="form-control" asp-for="Photo" />
+            <span class="text-danger" asp-validation-for="Photo"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShowInHome" class="control-form "></label>
+            <div class="form-group">
+                <label for="add">Add</label>
+                <input class="px-2" id="add" type="checkbox" asp-for="ShowInHome" />
+                <span asp-validation-for="ShowInHome" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SundayIsWorking" class="control-form "></label>
+            <div class="form-group">
+                <label for="working">Working</label>
+                <input class="px-2" id="working" type="checkbox" asp-for="SundayIsWorking" />
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Facebook"></label>
+            <input class="form-control" asp-for="Facebook" placeholder="Optional" />
+            <span class="text-danger" asp-validation-for="Facebook"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LinkedIn"></label>
+            <input class="form-control" asp-for="LinkedIn" placeholder="Optional" />
+            <span class="text-danger" asp-validation-for="LinkedIn"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Twitter"></label>
+            <input class="form-control" asp-for="Twitter" placeholder="Optional" />
+            <span class="text-danger" asp-validation-for="Twitter"></span>
+        </div>
+        <div class="pt-2">
+            <button class="btn btn-outline-success">Submit</button>
+            <a class="btn btn-outline-danger" asp-action="index" asp-controller="doctor">Cancel</a>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
+    <script>
+
+        ClassicEditor
+            .create(document.querySelector('#Introducing'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#Skills'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    }
+

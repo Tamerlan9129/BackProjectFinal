@@ -1,0 +1,60 @@
+﻿@using Web.Areas.Admin.ViewModels.WhyChooseUs;
+@model WhyChooseUsIndexVM;
+
+<h4>Why Choose Us</h4>
+@{
+    if (Model.WhyChooseUs == null)
+    {
+        <div>
+            <a asp-action="create" asp-controller="whychooseus" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+        </div>
+    }
+    if (Model.WhyChooseUs != null)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Added Home</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Modified At</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.WhyChooseUs.Id</td>
+                    <td>@Model.WhyChooseUs.Title</td>
+                    <td>@Html.Raw(Model.WhyChooseUs.Description)</td>
+                    <td>
+                        <img style="width:140px;height:120px;object-fit:cover" class="img-thumbnail" src="~/assets/images/@Model.WhyChooseUs.PhotoName" />
+                    </td>
+                    <td>@Model.WhyChooseUs.CreatedAt</td>
+                    <td>
+                        @{
+                            if (@Model.WhyChooseUs.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                            {
+                                <p>Non Modified</p>
+                            }
+                            else
+                            {
+                                @Model.WhyChooseUs.ModifiedAt
+                            }
+                        }
+                    </td>
+                    <td>
+                        <form method="post" class="d-flex">
+                            <a asp-action="update" asp-controller="whychooseus" asp-area="admin" asp-route-id="@Model.WhyChooseUs.Id" class="btn btn-outline-warning">Update</a>
+                            <a asp-action="details" asp-controller="whychooseus" asp-area="admin" asp-route-id="@Model.WhyChooseUs.Id" class="btn btn-outline-secondary mx-2">Details</a>
+                            <button type="submit" class="btn btn-outline-danger" asp-action="delete" asp-controller="whychooseus" asp-area="admin" asp-route-id="@Model.WhyChooseUs.Id">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
+
+

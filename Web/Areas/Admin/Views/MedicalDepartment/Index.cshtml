@@ -1,0 +1,52 @@
+﻿@using Web.Areas.Admin.ViewModels.MedicalDepartment;
+@model MedicalDepartmentIndexVM;
+
+<h4>Medical Department</h4>
+<div>
+    <a asp-action="create" asp-controller="medicaldepartment" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Created At</th>
+            <th>Modified At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var medicaldepartment in Model.MedicalDepartments)
+        {
+            <tr>
+                <td>@medicaldepartment.Id</td>
+                <td>@medicaldepartment.Title</td>
+                <td style="width:350px">@Html.Raw(medicaldepartment.Description)</td>
+                <td>
+                    <img style="width:50px;height:50px;object-fit:cover" class="img-thumbnail" src="~/assets/images/@medicaldepartment.PhotoName" />
+                </td>
+                <td>@medicaldepartment.CreatedAt</td>
+                <td>
+                    @{
+                        if (@medicaldepartment.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                        {
+                            <p>Non Modified</p>
+                        }
+                        else
+                        {
+                            @medicaldepartment.ModifiedAt
+                        }
+                    }
+                </td>
+                <td>
+                    <form method="post" class="d-flex">
+                        <a asp-action="update" asp-controller="medicaldepartment" asp-area="admin" asp-route-id="@medicaldepartment.Id" class="btn btn-outline-warning mx-2">Update</a>
+                        <button type="submit" class="btn btn-outline-danger" asp-action="delete" asp-controller="medicaldepartment" asp-area="admin" asp-route-id="@medicaldepartment.Id">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

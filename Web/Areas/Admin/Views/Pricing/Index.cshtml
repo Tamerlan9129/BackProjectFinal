@@ -1,0 +1,59 @@
+﻿@using Web.Areas.Admin.ViewModels.Pricing;
+@model PricingIndexVM;
+
+<h4>Pricing</h4>
+@{
+
+    <div>
+        <a asp-action="create" asp-controller="pricing" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">SubTitle</th>
+                <th scope="col">Features</th>
+                <th scope="col">Active Status</th>
+                <th scope="col">Price Per</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Modified At</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        @foreach (var @pricing in Model.Pricings)
+        {
+            <tbody>
+                <tr>
+                    <td>@pricing.Id</td>
+                    <td>@pricing.Title</td>
+                    <td>@pricing.SubTitle</td>
+                    <td>@Html.Raw(pricing.Features)</td>
+                    <td>@pricing.Status</td>
+                    <td>@pricing.Period</td>
+                    <td>@pricing.CreatedAt</td>
+                    <td>
+                        @{
+                            if (@pricing.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                            {
+                                <p>Non Modified</p>
+                            }
+                            else
+                            {
+                                @pricing.ModifiedAt
+                            }
+                        }
+                    </td>
+                    <td>
+                        <form method="post" class="d-flex">
+                            <a asp-action="update" asp-controller="pricing" asp-area="admin" asp-route-id="@pricing.Id" class="btn btn-outline-warning mx-2">Update</a>
+                            <button type="submit" class="btn btn-outline-danger" asp-action="delete" asp-controller="pricing" asp-area="admin" asp-route-id="@pricing.Id">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+
+        }
+    </table>
+
+}

@@ -1,0 +1,51 @@
+﻿@using Web.Areas.Admin.ViewModels.HomeMainSlider;
+@model HomeMainSliderIndexVM;
+<div>
+    <a asp-action="create" asp-controller="homemainslider" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Slogan</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Modified At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var homeMainSlider in Model.HomeMainSliders)
+        {
+            <tr>
+                <td>@homeMainSlider.Id</td>
+                <td>@homeMainSlider.Title</td>
+                <td>@homeMainSlider.Slogan</td>
+                <td>
+                    <img style="width:120px;height:120px;object-fit:cover" class="img-thumbnail" src="~/assets/images/@homeMainSlider.PhotoName" />
+                </td>
+                <td>@homeMainSlider.CreatedAt</td>
+                <td>
+                    @{
+                        if (@homeMainSlider.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                        {
+                            <p>Non Modified</p>
+                        }
+                        else
+                        {
+                            @homeMainSlider.ModifiedAt
+                        }
+                    }
+                </td>
+                <td>
+                    <form method="post">
+                        <a asp-action="update" asp-controller="homemainslider" asp-area="admin" asp-route-id="@homeMainSlider.Id" class="btn btn-outline-warning">Update</a>
+                        <a asp-action="details" asp-controller="homemainslider" asp-area="admin" asp-route-id="@homeMainSlider.Id" class="btn btn-outline-secondary">Details</a>
+                        <button type="submit" class="btn btn-outline-danger" asp-action="delete" asp-controller="homemainslider" asp-area="admin" asp-route-id="@homeMainSlider.Id">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

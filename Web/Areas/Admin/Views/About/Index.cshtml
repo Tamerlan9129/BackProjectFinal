@@ -1,0 +1,73 @@
+﻿@using Web.Areas.Admin.ViewModels.About;
+@model AboutIndexVM;
+
+
+<h4>About</h4>
+@{
+    if (Model.About == null)
+    {
+        <div>
+            <a asp-action="create" asp-controller="about" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+        </div>
+    }
+    if (Model.About != null)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Header</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Sign Photo</th>
+                    <th class="text-center" scope="col">Photos</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Modified At</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.About.Id</td>
+                    <td>@Model.About.Header</td>
+                    <td>@Html.Raw(Model.About.Title)</td>
+                    <td>@Html.Raw(Model.About.Description)</td>
+                    <td>
+                        <img style="width:90px;height:70px;object-fit:contain" class="img-thumbnail" src="~/assets/images/@Model.About.IconName" />
+                    </td>
+                    <td>
+                        @{
+                            foreach (var photo in Model.Photos)
+                            {
+                                <img style="width:80px;height:120px;object-fit:contain" class="img-thumbnail" src="~/assets/images/@photo.PhotoName" />
+                            }
+                        }
+                    </td>
+
+                    <td>@Model.About.CreatedAt</td>
+                    <td>
+                        @{
+                            if (@Model.About.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                            {
+                                <p>Non Modified</p>
+                            }
+                            else
+                            {
+                                @Model.About.ModifiedAt
+                            }
+                        }
+                    </td>
+                    <td>
+                        <form method="post" class="d-flex">
+                            <a asp-action="update" asp-controller="about" asp-area="admin" asp-route-id="@Model.About.Id" class="btn btn-outline-warning">Update</a>
+                            <a asp-action="details" asp-controller="about" asp-area="admin" asp-route-id="@Model.About.Id" class="btn btn-outline-secondary mx-2">Details</a>
+                            <button type="submit" class="btn btn-outline-danger" asp-action="delete" asp-controller="about" asp-area="admin" asp-route-id="@Model.About.Id">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
+
+

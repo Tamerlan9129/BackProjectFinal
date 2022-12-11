@@ -1,0 +1,54 @@
+﻿@using Web.Areas.Admin.ViewModels.LatestNews;
+@model LastestNewsIndexVM;
+
+<h4>Lastest News</h4>
+<div>
+    <a asp-action="create" asp-controller="lastestnews" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Order</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Modified At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lastestNews in Model.LastestNews)
+        {
+            <tr>
+                <td>@lastestNews.Id</td>
+                <td>@lastestNews.Title</td>
+                <td>@lastestNews.Type</td>
+                <td>@lastestNews.Order</td>
+                <td>
+                    <img style="width:120px;height:120px;object-fit:cover" class="img-thumbnail" src="~/assets/images/@lastestNews.PhotoName" />
+                </td>
+                <td>@lastestNews.CreatedAt</td>
+                <td>
+                    @{
+                        if (@lastestNews.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                        {
+                            <p>Non Modified</p>
+                        }
+                        else
+                        {
+                            @lastestNews.ModifiedAt
+                        }
+                    }
+                </td>
+                <td>
+                    <form class="d-flex " method="post">
+                        <a asp-action="update" asp-controller="lastestnews" asp-area="admin" asp-route-id="@lastestNews.Id" class="btn btn-outline-warning mx-2">Update</a>
+                        <button type="submit" class="btn btn-outline-danger" asp-action="delete" asp-controller="lastestnews" asp-area="admin" asp-route-id="@lastestNews.Id">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

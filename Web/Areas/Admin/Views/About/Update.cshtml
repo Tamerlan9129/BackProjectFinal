@@ -1,0 +1,83 @@
+﻿@using Web.Areas.Admin.ViewModels.About;
+@model AboutUpdateVM;
+
+
+<div class="container ">
+    <h4>About</h4>
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <textarea class="form-control" asp-for="Title"></textarea>
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Header"></label>
+            <input class="form-control" asp-for="Header" />
+            <span asp-validation-for="Header"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea class="form-control" asp-for="Description"></textarea>
+            <span class="text-danger" asp-validation-for="Description"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Photos"></label>
+            <input class="form-control" asp-for="Photos" />
+            <span asp-validation-for="Photos"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="IconPhoto"></label>
+            <input class="form-control" asp-for="IconPhoto" />
+            <span asp-validation-for="IconPhoto"></span>
+        </div>
+
+        <div class="pt-2">
+            <button class="btn btn-outline-success">Submit</button>
+            <a class="btn btn-outline-danger" asp-action="index" asp-controller="about">Cancel</a>
+        </div>
+    </form>
+
+
+    <div class="pt-5 d-flex">
+        <h4>Photos:</h4>
+        @{
+            foreach (var photo in Model.AboutPhoto)
+            {
+                <div class="d-flex flex-column text-center px-5">
+                    <img style="width:200px;height:300px" class="img-thumbnail" src="~/assets/images/@photo.PhotoName" />
+                    <div>  <span>Order:@photo.Order</span></div>
+                    <div>
+                        <form method="post" asp-action="deletephoto" asp-controller="about" asp-area="admin" asp-route-id="@photo.Id">
+                            <a asp-action="updatephoto" asp-controller="about" asp-area="admin" asp-route-id="@photo.Id" class="btn btn-outline-warning">Update</a>
+                            <button class="btn btn-outline-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#Title'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    </script>
+    }

@@ -1,0 +1,42 @@
+﻿@using Web.Areas.Admin.ViewModels.MedicalDepartment;
+@model MedicalDepartmentCreateVM;
+
+<div class="container ">
+    <h4>Medical Department</h4>
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input class="form-control" asp-for="Title">
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea class="form-control" asp-for="Description"></textarea>
+            <span class="text-danger" asp-validation-for="Description"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Photo"></label>
+            <input class="form-control" asp-for="Photo" />
+            <span asp-validation-for="Photo"></span>
+        </div>
+        <div class="pt-2">
+            <button class="btn btn-outline-success">Submit</button>
+            <a class="btn btn-outline-danger" asp-action="index" asp-controller="medicaldepartment">Cancel</a>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    }

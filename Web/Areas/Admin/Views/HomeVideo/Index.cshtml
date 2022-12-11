@@ -1,0 +1,58 @@
+﻿@using Web.Areas.Admin.ViewModels.HomeVideo;
+@model HomeVideoIndexVM;
+
+
+<h4>Home Video</h4>
+@{
+    if (Model.HomeVideo == null)
+    {
+        <div>
+            <a asp-action="create" asp-controller="homevideo" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+        </div>
+    }
+    if (Model.HomeVideo != null)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Cover Photo</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Modified At</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.HomeVideo.Id</td>
+                    <td> <img style="width:180px;height:120px;object-fit:contain" class="img-thumbnail" src="~/assets/images/@Model.HomeVideo.PhotoName" /></td>
+                    <td>@Model.HomeVideo.Link</td>
+
+
+                    <td>@Model.HomeVideo.CreatedAt</td>
+                    <td>
+                        @{
+                            if (@Model.HomeVideo.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                            {
+                                <p>Non Modified</p>
+                            }
+                            else
+                            {
+                                @Model.HomeVideo.ModifiedAt
+                            }
+                        }
+                    </td>
+                    <td>
+                        <form method="post" class="d-flex gap-4">
+                            <a asp-action="update" asp-controller="homevideo" asp-area="admin" asp-route-id="@Model.HomeVideo.Id" class="btn btn-outline-warning">Update</a>
+                            <button type="submit" class="btn btn-outline-danger mx-2" asp-action="delete" asp-controller="homevideo" asp-area="admin" asp-route-id="@Model.HomeVideo.Id">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
+
+

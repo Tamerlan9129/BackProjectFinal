@@ -1,0 +1,48 @@
+﻿@using Web.Areas.Admin.ViewModels.ProductCategory;
+@model ProductCategoryIndexVM;
+
+<h4>Product Categories</h4>
+<div>
+    <a asp-action="create" asp-controller="productcategory" asp-area="admin" class="btn btn-outline-success mb-3">Create</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Modified At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var category in Model.Categories)
+            {
+                <tr>
+                    <td>@category.Id</td>
+                    <td>@category.Title</td>
+                    <td>@category.CreatedAt</td>
+                    <td>
+                        @{
+                            if (@category.ModifiedAt.ToString() == "01.01.0001 00:00:00")
+                            {
+                                <p>Non Modified</p>
+                            }
+                            else
+                            {
+                                @category.ModifiedAt
+                            }
+                        }
+                    </td>
+                    <td>
+                        <form method="post" class="d-flex gap-4">
+                            <a asp-action="update" asp-controller="productcategory" asp-area="admin" asp-route-id="@category.Id" class="btn btn-outline-warning">Update</a>
+                            <button type="submit" class="btn btn-outline-danger mx-2" asp-action="delete" asp-controller="productcategory" asp-area="admin" asp-route-id="@category.Id">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

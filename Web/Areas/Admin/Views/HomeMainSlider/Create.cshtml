@@ -1,0 +1,44 @@
+﻿@using Web.Areas.Admin.ViewModels.HomeMainSlider;
+@model HomeMainSliderCreateVM;
+<div class="container ">
+    <h4>Home Main Slider</h4>
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input class="form-control" asp-for="Title">
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slogan"></label>
+            <input class="form-control" asp-for="Slogan" />
+            <span class="text-danger" asp-validation-for="Slogan"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ButtonLink"></label>
+            <input class="form-control" asp-for="ButtonLink" />
+            <span asp-validation-for="ButtonLink"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Photo"></label>
+            <input class="form-control" asp-for="Photo" />
+            @{
+                if (Html.ViewData.ModelState["Photo"] != null)
+                {
+                    foreach (var error in Html.ViewData.ModelState["Photo"].Errors)
+                    {
+                        <p class="text-danger">@error.ErrorMessage</p>
+                    }
+                }
+            }
+        </div>
+        <div class="pt-2">
+            <button class="btn btn-outline-success">Submit</button>
+            <a class="btn btn-outline-danger" asp-action="index" asp-controller="homemainslider">Cancel</a>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
+
+    }

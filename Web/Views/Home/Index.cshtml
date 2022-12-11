@@ -1,0 +1,312 @@
+﻿@using Web.ViewModels.Home;
+@model HomeIndexVM;
+@{
+    ViewBag.Title = "Home";
+}
+<main>
+    <section class="banner no-select">
+        @{
+            foreach (var slider in Model.HomeMainSlider)
+            {
+                <div class="banner-page banner-page-@slider.Order" style="background-image: url(assets/images/@slider.PhotoName);">
+                    <div style="font-size:50px" class="caption caption-@slider.Order" data-aos="fade-up" data-aos-duration="2000">
+                        @slider.Title
+                    </div>
+                    <div class="auxilary-caption" data-aos="fade-up" data-aos-duration="2000">
+                        @slider.Slogan
+                    </div>
+                    <div href="@slider.ButtonLink" class="button" data-aos="fade-up" data-aos-duration="2000">
+                        Learn more
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="bullets">
+            <div class="bullet bullet-1 selected"></div>
+            <div class="bullet bullet-2"></div>
+            <div class="bullet bullet-3"></div>
+        </div>
+
+        <div class="overlay">
+        </div>
+    </section>
+    <!-- banner section ends -->
+    <!-- vision section starts -->
+    <section class="vision no-select">
+        <div class="container">
+            <div class="vision-top row  justify-content-center" data-aos="fade-up" data-aos-duration="2000">
+                <div class="col-lg-10 text-center">
+                    <h2 class="sub-heading">Our vision</h2>
+                    <h2 class="heading">Combining Quality Care& Modern Conveniences.</h2>
+                    <span class="description">
+                        We started One Medical with the belief that clinical excellence
+                        commitment to service and
+                        a modern approach make for a truly great experience. To bring our vision to life, we
+                        listened to our patients. thoughtfully applied technology, and hired the best doctors to
+                        create a practice that is designed specifically to meet your needs.
+                    </span>
+                </div>
+            </div>
+            <div class="vision-bottom row">
+                @{
+                    foreach (var ourVision in Model.OurVision)
+                    {
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="item" data-aos="fade-up" data-aos-duration="2000">
+                                <img src="~/assets/images/@ourVision.PhotoName" alt="" class="item-icon">
+                                <div class="item-content">
+                                    <h5 class="title">@ourVision.Title</h5>
+                                    <div style="font-size:14px">
+                                        @Html.Raw(ourVision.Description)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+    <!-- vision section ends -->
+    <!-- about section starts -->
+    @{
+        if (Model.About != null)
+        {
+            <section class="about about-home no-select">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="about-content" data-aos="fade-up" data-aos-duration="2000">
+                                <span class="sub-heading">@Model.About.Header</span>
+                                <h2 class="heading">
+                                    @Html.Raw(Model.About.Title)
+                                </h2>
+                                @Html.Raw(Model.About.Description)
+                                <div class="signature">
+                                    <img src="~/assets/images/@Model.About.IconName" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="about-images text-sm-center text-md-left" data-aos="fade-up"
+                             data-aos-duration="2000">
+                                @foreach (var photo in Model.AboutPhoto)
+                                {
+                                    <img src="~/assets/images/@photo.PhotoName" class="about-image about-image-@photo.Order mt-5 mt-md-0" />
+                                    <img src="~/assets/images/@photo.PhotoName" class="about-image about-image-@photo.Order  mt-5 mt-md-0" />
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+    }
+    <!-- about section ends -->
+    <!-- department section starts -->
+    <section class="department no-select">
+        <div class="container">
+            <div class="department-top row justify-content-center" data-aos="fade-up" data-aos-duration="2000">
+                <div class="col-lg-10 text-center">
+                    <h2 class="sub-heading">What we do best</h2>
+                    <h2 class="heading">Medical Departments</h2>
+                    <span class="description">
+                        Expert physician specialists and caring clinical staff provide you
+                        with an exceptional patient care is what sets Syring Medical Center apaert health care
+                        experience.
+                    </span>
+                </div>
+            </div>
+            <div class="department-center">
+                <div class="row ">
+                    @{
+                        foreach (var medicalDepartment in Model.MedicalDepartments)
+                        {
+                            <div class="col-sm-12 col-lg-4 mb-4">
+                                <div class="item" data-aos="fade-up" data-aos-duration="2000">
+                                    <img style="width:66px;height:76px;object-fit:cover" src="~/assets/images/@medicalDepartment.PhotoName" alt="" class="item-icon">
+                                    <div class="item-content">
+                                        <h5 class="title">@medicalDepartment.Title</h5>
+                                        <div style="font-size:14px !important;" class="item-text">
+                                            @Html.Raw(medicalDepartment.Description)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="department-bottom text-center">
+            <div class="button" data-aos="fade-up" data-aos-duration="2000">View All Departments</div>
+        </div>
+
+    </section>
+    <!-- department section ends -->
+    @{
+        if (Model.HomeVideo != null)
+        {
+            <!-- video section starts -->
+            <section class="video" style="background-image: url(assets/images/@Model.HomeVideo.PhotoName)" data-aos="fade-up"
+                 data-aos-duration="2000">
+                <div class="video-overlay d-flex justify-content-center align-items-center">
+                    <div class="play-button d-flex justify-content-center align-items-center">
+                        <i class="fas fa-caret-right triangle"></i>
+                        <div class="scaling-background"> </div>
+                    </div>
+                </div>
+            </section>
+            <!-- video section ends -->
+            <section class="modal">
+                <div class="container">
+                    <div class="quit-button d-flex justify-content-end"><i class="fas fa-times quit-x"></i></div>
+                    <div class="modal-content">
+                        <iframe width="fit-content" height="630" src="@Html.Raw(Model.HomeVideo.Link)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </section>
+        }
+    }
+    <!-- doctors section starts -->
+    <section class="doctors no-select">
+        <div class="container">
+            <div class="doctors-top row d-flex justify-content-between" data-aos="fade-up" data-aos-duration="2000">
+                <h2 class="sub-heading">Our Professional Doctor</h2>
+                <div class="doctors-top-right">
+                    <span><a asp-action="index" asp-controller="doctor">View all members</a></span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="doctors-bottom row ">
+                @{
+                    foreach (var doctor in Model.Doctors)
+                    {
+
+                        <div class="col-sm-12 col-md-6 col-lg-3  text-center" data-aos="fade-up" data-aos-duration="2000">
+                            <div class="doctor-item">
+                                <img style="width:180px;height:180px;border-radius:50%;" src="~/assets/images/@doctor.PhotoName" alt="">
+                                <div class="doctor-info">
+                                    <h4 class="doctor-name">@doctor.FullName</h4>
+                                    <p class="doctor-speciality">@doctor.Position</p>
+                                    <div class="social-media">
+                                        @if (doctor.Facebook != null)
+                                        {
+                                            <a href="@doctor.Facebook">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        }
+                                        @if (doctor.LinkedIn != null)
+                                        {
+                                            <a href="@doctor.LinkedIn">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        }
+                                        @if (doctor.Twitter != null)
+                                        {
+                                            <a href="@doctor.Twitter">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+        </div>
+    </section>
+    <!-- doctors section ends -->
+    <!-- why-choose section starts -->
+    @{
+        if (Model.WhyChooseUs != null)
+        {
+            <section class="why-choose no-select">
+                <div class="container">
+                    <div class="row">
+                        <div class="why-choose-left col-lg-6" data-aos="fade-up" data-aos-duration="2000">
+                            <h2 class="heading ">
+                                <span class="defaultcolor">  @Model.WhyChooseUs.Title</span>
+                            </h2>
+                            @Html.Raw(@Model.WhyChooseUs.Description)
+                            <div style="font-size:16px!important;font-weight:400" class="pt-3">
+                                @Html.Raw(Model.WhyChooseUs.Services)
+                            </div>
+                        </div>
+                        <div class="why-choose-right col-lg-6 text-lg-right" data-aos="fade-up" data-aos-duration="2000">
+                            <div style="background-image: url(/assets/images/@Model.WhyChooseUs.PhotoName)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        <div class="container">
+            <div class="row align-items-center count-to no-select  " data-aos="fade-up" data-aos-duration="2000">
+
+                @foreach (var statistic in Model.Statistics)
+                {
+                    <div class=" col-12 col-md-4 col-lg-3  text-center count-item">
+                        <i class="fas fa-plus count-plus"></i>
+                        <p class='numscroller' data-min='1' data-max='@statistic.Quantity' data-delay='30' data-increment='10'></p>
+                        <span class="satisfied-patients">@statistic.Title</span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    <!-- why-choose section ends -->
+    <!-- count-to starts -->
+    <!-- count-to ends -->
+    <!-- latest-news section starts -->
+    <section class="latest-news no-select">
+        <div class="container">
+            <div class="latest-news-top row d-flex justify-content-between align-items-center" data-aos="fade-up"
+                 data-aos-duration="2000">
+                <h2 class="heading">Lastest News</h2>
+            </div>
+            <div class="latest-news-bottom" data-aos="fade-up" data-aos-duration="2000">
+                @{
+                    foreach (var lastestNews in Model.LastestNews)
+                    {
+                        <div class="news-item">
+                            <div class="item-photo">
+                                <img src="~/assets/images/@lastestNews.PhotoName" alt="">
+                            </div>
+                            <div class="date-type  text-center">
+                                <span class="date">@lastestNews.CreatedAt.ToLongDateString()</span>
+                                <span class="type">| @lastestNews.Type</span>
+                            </div>
+                            <div class="item-text text-center">
+                                @lastestNews.Title
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+</main>
+<!-- latest-news section ends -->
